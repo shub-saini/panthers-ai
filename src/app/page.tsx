@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BrainCircuit, FileCheck, PenTool } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +29,7 @@ export default function Home() {
           <Hero />
           <Features />
           <HowItWorks />
-          <CTA />
+          <Bottom />
         </motion.div>
       )}
     </AnimatePresence>
@@ -65,7 +66,12 @@ function Header() {
             </motion.li>
           ))}
         </motion.ul>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className='flex justify-center gap-2'
+        >
+          <ThemeToggle />
           <Button className='bg-primary text-primary-foreground hover:bg-primary/90'>
             Get Started
           </Button>
@@ -96,7 +102,7 @@ function Hero() {
               size='lg'
               className='bg-primary text-primary-foreground hover:bg-primary/90'
             >
-              Start Free Trial
+              Dive In Now
             </Button>
             <Button
               size='lg'
@@ -279,7 +285,7 @@ function HowItWorks() {
   );
 }
 
-function CTA() {
+function Bottom() {
   return (
     <motion.section
       className='py-16 px-4'
@@ -311,13 +317,7 @@ function CTA() {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <Button className='bg-primary text-primary-foreground hover:bg-primary/90 mr-4 transition-transform duration-300 hover:scale-105'>
-            Get Started Now
-          </Button>
-          <Button
-            variant='outline'
-            className='border-primary text-primary hover:bg-primary/10'
-          >
-            Request a Demo
+            Start Your Adventure
           </Button>
         </motion.div>
       </div>
