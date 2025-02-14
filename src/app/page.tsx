@@ -2,10 +2,10 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { SignUpButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BrainCircuit, FileCheck, PenTool } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +25,6 @@ export default function Home() {
         >
           <div className='fixed inset-0 bg-grid-white/[0.02] -z-10' />
           <div className='fixed inset-0 bg-gradient-to-tr from-primary/10 via-primary/5 to-background/80 -z-10' />
-          <Header />
           <Hero />
           <Features />
           <HowItWorks />
@@ -33,51 +32,6 @@ export default function Home() {
         </motion.div>
       )}
     </AnimatePresence>
-  );
-}
-
-function Header() {
-  return (
-    <header className='fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl'>
-      <nav className='container mx-auto px-4 py-4 flex justify-between items-center'>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <h1 className='text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80'>
-            Panthers AI
-          </h1>
-        </motion.div>
-        <motion.ul className='hidden md:flex space-x-8'>
-          {["Features", "How It Works", "Testimonials"].map((item, i) => (
-            <motion.li
-              key={item}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <a
-                href={`#${item.toLowerCase().replace(" ", "-")}`}
-                className='text-muted-foreground hover:text-primary transition-colors'
-              >
-                {item}
-              </a>
-            </motion.li>
-          ))}
-        </motion.ul>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className='flex justify-center gap-2'
-        >
-          <ThemeToggle />
-          <Button className='bg-primary text-primary-foreground hover:bg-primary/90'>
-            Get Started
-          </Button>
-        </motion.div>
-      </nav>
-    </header>
   );
 }
 
@@ -98,12 +52,14 @@ function Hero() {
             intelligent automation
           </p>
           <div className='flex flex-wrap gap-4 justify-center'>
-            <Button
-              size='lg'
-              className='bg-primary text-primary-foreground hover:bg-primary/90'
-            >
-              Dive In Now
-            </Button>
+            <SignUpButton mode='modal'>
+              <Button
+                size='lg'
+                className='bg-primary text-primary-foreground hover:bg-primary/90'
+              >
+                Get Started
+              </Button>
+            </SignUpButton>
             <Button
               size='lg'
               variant='outline'
@@ -316,9 +272,11 @@ function Bottom() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <Button className='bg-primary text-primary-foreground hover:bg-primary/90 mr-4 transition-transform duration-300 hover:scale-105'>
-            Start Your Adventure
-          </Button>
+          <SignUpButton mode='modal'>
+            <Button className='bg-primary text-primary-foreground hover:bg-primary/90 mr-4 transition-transform duration-300 hover:scale-105'>
+              Start Your Adventure
+            </Button>
+          </SignUpButton>
         </motion.div>
       </div>
     </motion.section>
